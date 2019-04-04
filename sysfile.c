@@ -464,7 +464,7 @@ sys_bstat(void)
 int
 sys_swap(void)
 {
-  acquire(&sysSwapLock.lock);
+  acquire(&sysSwapLock);
   uint addr;
 
   // Fetch the 0th 32-bit system call argument 
@@ -477,6 +477,6 @@ sys_swap(void)
   pte_t *pte = select_a_victim(myproc()->pgdir);
   swap_page_from_pte(pte);
 
-  release(&sysSwapLock.lock);
+  release(&sysSwapLock);
   return 0;
 }
